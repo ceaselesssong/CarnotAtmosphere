@@ -1,46 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.css';
-import { RoomDisplay } from './components';
-import { Air, Room } from './models';
+import { GreetBox } from './models';
+import { GreetBoxDisplay } from './components';
 
 function App() {
-  // Create sample rooms with different air qualities
-  const rooms: Room[] = [
-    {
-      name: 'Poor Quality Room',
-      air: new Air(0, 100)
-    },
-    {
-      name: 'Poor Quality Room',
-      air: new Air(0.2, 100)
-    },
-    {
-      name: 'Poor Quality Room',
-      air: new Air(0.4, 100)
-    },
-    {
-      name: 'Poor Quality Room',
-      air: new Air(0.6, 100)
-    },
-    {
-      name: 'Poor Quality Room',
-      air: new Air(0.8, 100)
-    },
-    {
-      name: 'Poor Quality Room',
-      air: new Air(1, 100)
-    }
-  ];
+  const [greetBox] = useState(() => new GreetBox());
+  const [, setForceUpdate] = useState(0);
 
   return (
     <div className="app">
-      <div className="rooms-container">
-        <h1>CarnotAtmosphere - Room Air Quality</h1>
-        <div className="rooms-grid">
-          {rooms.map((room, index) => (
-            <RoomDisplay key={index} room={room} />
-          ))}
-        </div>
+      <div className="container">
+        <h1>GreetBox Demo</h1>
+        <GreetBoxDisplay greetBox={greetBox} />
       </div>
     </div>
   );
