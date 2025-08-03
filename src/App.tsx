@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import { GreetBoxDisplay } from './components';
 import { GreetBox } from './models';
@@ -16,6 +16,21 @@ function App() {
   });
   
   const [, setForceUpdate] = useState(0);
+
+  // Toggle all boxes every 3 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      // Toggle all greet boxes
+      greetBoxes.forEach(greetBox => {
+        greetBox.generateNext();
+        greetBox.updateCurrent();
+      });
+      setForceUpdate(prev => prev + 1); // Force re-render
+    }, 3000); // 3000 milliseconds = 3 seconds
+
+    // Cleanup function to clear the interval when component unmounts
+    return () => clearInterval(interval);
+  }, [greetBoxes]); // Dependency array includes greetBoxes
 
   const handleBoxClick = (index: number) => {
     greetBoxes[index].generateNext();
@@ -36,7 +51,8 @@ function App() {
             />
           ))}
         </div>
-        <p>Click any box to toggle between "hello" and "goodbye"</p>
+        <p>All boxes toggle automatically every 3 seconds</p>
+        <p>Click any box to toggle it individually</p>
       </div>
     </div>
   );
