@@ -1,15 +1,15 @@
 import React from 'react';
-import { GreetBox } from '../models';
+import { GreetBox } from './GreetBox';
 
-interface GreetBoxDisplayProps {
+interface GreetBoxComponentProps {
   greetBox: GreetBox;
-  onClick?: () => void;
+  onClick: () => void;
 }
 
 /**
  * Displays a GreetBox as a 100x100 pixel square with text from its currentState.
  */
-export const GreetBoxDisplay: React.FC<GreetBoxDisplayProps> = ({ greetBox, onClick }) => {
+export const GreetBoxComponent: React.FC<GreetBoxComponentProps> = ({ greetBox, onClick }) => {
   const boxStyle: React.CSSProperties = {
     width: '100px',
     height: '100px',
@@ -23,7 +23,7 @@ export const GreetBoxDisplay: React.FC<GreetBoxDisplayProps> = ({ greetBox, onCl
     padding: '5px',
     boxSizing: 'border-box',
     wordWrap: 'break-word',
-    cursor: onClick ? 'pointer' : 'default',
+    cursor: 'pointer',
   };
 
   return (
